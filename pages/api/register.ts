@@ -13,12 +13,11 @@ export default async function handler(
 
     const { email, name, password } = req.body;
 
-    const existingUser = prismadb.user.findUnique({
+    const existingUser = await prismadb.user.findUnique({
       where: {
         email,
       },
     });
-
     if (existingUser) {
       return res.status(422).json({ error: "Email taken" });
     }
@@ -26,11 +25,13 @@ export default async function handler(
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await prismadb.user.create({
-      email,
-      name,
-      hashedPassword,
-      image: "",
-      emailVerified: new Date(),
+      data: {
+        email,
+        name,
+        hashedPassword,
+        image: "",
+        emailVerified: new Date(),
+      },
     });
 
     return res.status(200).json(user);
