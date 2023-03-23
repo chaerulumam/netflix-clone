@@ -8,6 +8,7 @@ import useInfoModalStore from "@/hooks/useInfoModalStore";
 import InfoModal from "@/components/InfoModal";
 import MovieList from "@/components/MovieList";
 import useMovieList from "../hooks/useMovieList";
+import Footer from "@/components/Footer";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);

@@ -2,6 +2,7 @@ import React from "react";
 import { signOut } from "next-auth/react";
 
 import useCurrentUser from "@/hooks/useCurrentUser";
+import Link from "next/link";
 
 interface AccountMenuProps {
   visible?: boolean;
@@ -22,9 +23,11 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
             src="/images/default-slate.png"
             alt=""
           />
-          <p className="text-white text-sm group-hover/item:underline">
-            {currentUser?.name}
-          </p>
+          <Link href="/profiles">
+            <p className="text-white text-sm group-hover/item:underline">
+              {currentUser?.name}
+            </p>
+          </Link>
         </div>
       </div>
       <hr className="bg-gray-600 border-0 h-px my-4" />
